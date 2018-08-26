@@ -1,0 +1,79 @@
+<?php 
+require('dbcon.php');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#c3dde0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#d4e3e5;
+} 
+table.hovertable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+</style>
+<title>View Records</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body background="images/bg.jpg">
+<?php
+include("menu.php");
+?>
+<h2>Subjects</h2>
+
+
+<table width="100%" border="1" style="border-collapse:collapse;" class="hovertable">
+<thead>
+<tr>
+<th><strong>Sl .No</strong></th>
+<th><strong>Subject Name</strong></th>
+<th><strong>Shorcut</strong></th>
+<th><strong>Subject Code</strong></th>
+<th><strong>Department</strong></th>
+<th><strong>Semester</strong></th>
+<th><strong>Lecturer</strong></th>
+<th><strong>Edit</strong></th>
+<th><strong>Delete</strong></th>
+</tr>
+</thead>
+<tbody>
+<?php
+$count=1;
+$sel_query="Select * from subject ORDER BY id desc;";
+$result = mysql_query($sel_query);
+while($row = mysql_fetch_assoc($result)) { ?>
+<tr><td align="center"><?php echo $count; ?></td>
+<td onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5'"; align="center"><?php echo $row["sname"]; ?></td>
+<td onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5'"; align="center"><?php echo $row["sshrct"]; ?></td>
+<td  onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5'";align="center"><?php echo $row["subid"]; ?></td>
+<td onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5'"; align="center"><?php echo $row["dept"]; ?></td>
+<td onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5'"; align="center"><?php echo $row["sem"]; ?></td>
+<td onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5'"; align="center"><?php echo $row["lect"]; ?></td>
+<td onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5'"; align="center"><a href="editsubject.php?id=<?php echo $row["id"]; ?>"><img src="edit.png" ></a></td>
+<td onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5'"; align="center"><a href="delsub.php?id=<?php echo $row["id"]; ?>"><img src="delete.png"></a></td></tr>
+<?php $count++; } ?>
+</tbody>
+</table>
+</div>
+<a href="logout.php"><button>Logout</button></a>
+</body>
+</html>
